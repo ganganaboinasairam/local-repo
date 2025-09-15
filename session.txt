@@ -1,0 +1,29 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.*" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Session Variables</title>
+</head>
+<body>
+    <h2>All Session Variables</h2>
+    <%
+        if (session == null) {
+            out.println("<p>No active session.</p>");
+        } else {
+            Enumeration<String> attributeNames = session.getAttributeNames();
+            if (!attributeNames.hasMoreElements()) {
+                out.println("<p>No session attributes found.</p>");
+            } else {
+                out.println("<ul>");
+                while (attributeNames.hasMoreElements()) {
+                    String name = attributeNames.nextElement();
+                    Object value = session.getAttribute(name);
+                    out.println("<li><b>" + name + ":</b> " + value + "</li>");
+                }
+                out.println("</ul>");
+            }
+        }
+    %>
+</body>
+</html>
